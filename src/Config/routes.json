@@ -1,0 +1,52 @@
+{
+    "routes": [
+        {
+            "path": "/",
+            "controller": "TodosController",
+            "action": "index",
+            "method": "GET"
+        },
+        {
+            "path": "/",
+            "controller": "TodosController",
+            "action": "create",
+            "method": "POST"
+        },
+        {
+            "path": "/todo/delete",
+            "controller": "TodosController",
+            "action": "delete",
+            "method": "GET"
+        },
+        {
+            "path": "/todo/update",
+            "controller": "TodosController",
+            "action": "update",
+            "method": "POST"
+        },
+        {
+            "path": "/register",
+            "controller": "AuthController",
+            "action": "showRegister",
+            "method": "GET"
+        },
+        {
+            "path": "/register",
+            "controller": "AuthController",
+            "action": "indexRegister",
+            "method": "POST"
+        },
+        {
+            "path": "/login",
+            "controller": "AuthController",
+            "action": "showLogin",
+            "method": "GET"
+        },
+        {
+            "path": "/login",
+            "controller": "AuthController",
+            "action": "indexLogin",
+            "method": "POST"
+        }
+    ]
+}
