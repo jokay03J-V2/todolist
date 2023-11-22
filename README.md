@@ -1,62 +1,73 @@
-# Les Bases de données
+# Todolist
+> Create or remove a todo made easy !
 
-**Prérequis**: Base du php, requêtes mysql
-**Objectif**: Communiquer avec une base de données, réaliser les opérations courantes (CRUD)
+## Requirements
+- php 8.x
+- Mysql(recommended, used by default) 8.x
+- PDO driver depend of your database type
+- Apache server
 
+## Getting started
+You can found a [getting started here](./getting-started.md)
 
-## Exercice
+## Run project
+Please refer to [getting started](./getting-started.md#run)
 
-Afin de s'entrainer à communiquer avec une base de données, on va créer une **TO-DO List** simple.
+## References
 
-On pourra ainsi: 
+### Config
+You can view an config example [here](./config.exemple.json)
 
-- Voir la liste
-- Ajouter une chose à faire
-- Modifier une chose à faire
-- Effacer une chose à faire
+```json
+{
+    "database": {
+        "name": "dbname", // database name
+        "host": "127.0.0.1", // database host
+        "port": 3306, // database post
+        "user": "root", // database user
+        "password": "" // database password
+    },
+    "ressources": {
+        "hostname": "http://localhost:3000" // url for serve local file using RessourceManager
+    },
+    "views": {
+        "notfound": "notfound" // (optional) view loaded when route is not found
+    },
+    // directory will be scanned when you use class using spl_autoload
+    "autoload": [
+        "src/Controllers",
+        "src/Core",
+        "src/Models"
+    ]
+}
+```
 
-### Etape 0
-- Créer le MCD et le MLD
+### Serve a local file
+For serve a local file into your view.
+You can use `RessourceManager` core class.
+It is available on all request even on _not found_ view.
 
-### Etape 1
+### Get Request informations
+You can refer to `Request` core class properties.
 
-Tout d'abord, il faudra se connecter à la base de donnée.
+### Return a custom response
+If you want return a reponse without render a view.
+You can use `Response` core class for update your response content-type for example.
+If you want additional informations you can read `Response` public method.
 
-- Créer une base de données
-- Ajouter dans le script php le code de la connexion à cette base.
+### Add route
+The strucure for add route.
 
-### Etape 2
-
-Création d'une chose à faire.
-
-- Valider les données saisi par l'utilisateur
-- Enregistrer ces données dans la base
-
-![Create](create.png)
-
-## Etape 3
-
-Voir la liste des choses à faire
-
-- récuperer toute la liste de choses à faire
-- Les afficher correctement
-
-![Select](select.png)
-
-## Etape 4
-
-Modifier la liste des choses à faire
-
-- Valider les données saisi par l'utilisateur
-- Modifier la base avec les nouvelles informations
-
-![update](update.png)
-
-## Etape 5
-
-Supprimer une chose à faire 
-
-- Supprimer la chose à faire de la base
-
-
-## N'oubliez pas le readme, le MCD, le MLD et votre bdd dans le git !
+```json
+{
+    "routes": [
+        // others routes....
+        {
+            "path": "/form", // path of the route
+            "controller": "HomeController", // controller name, it will be instancied
+            "action": "submit", // method of instancied controller, it will be runned with a request and reponse parameters
+            "method": "POST" // method of this route, you can have two same route path but with a differente method
+        }
+    ]
+}
+```
