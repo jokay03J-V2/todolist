@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?PowerDesigner signature="Workspace" version="15.1.0.2850"?>
+<!-- Veuillez ne pas modifier ce fichier -->
+
+<Workspace>
+	<Local Expanded="Yes">
+		<Model Expanded="Yes" ID="{38086B01-C9E1-11D4-9552-0090277716A9}" Name="todolist" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="conception.mcd"/>
+		<Model Expanded="Yes" ID="{EA646C77-9117-4E77-9625-9FE98B0EAEFB}" Name="todolist" Selected="Yes" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="todolist.mld"/>
+		<Model Expanded="Yes" ID="{EBF399BB-A16F-4539-B6C8-3E127505FA1D}" Name="todolist" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="todolist.mpd"/>
+	</Local>
+</Workspace>
