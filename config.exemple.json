@@ -1,0 +1,20 @@
+{
+    "database": {
+        "name": "dbname",
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "root",
+        "password": ""
+    },
+    "ressources": {
+        "hostname": "http://localhost:3000"
+    },
+    "views": {
+        "notfound": "notfound"
+    },
+    "autoload": [
+        "src/Controllers",
+        "src/Core",
+        "src/Models"
+    ]
+}
