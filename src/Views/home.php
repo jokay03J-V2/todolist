@@ -49,4 +49,7 @@ $ressources->css("css/todo.css");
         <?php } ?>
     </div>
 </main>
-<script src="<?= $ressources->get("js/edit.js") ?>"></script>
+<?php
+// Load js files
+$ressources->js("js/edit.js");
+?>
