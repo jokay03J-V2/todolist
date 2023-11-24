@@ -47,6 +47,12 @@
             "controller": "AuthController",
             "action": "indexLogin",
             "method": "POST"
+        },
+        {
+            "path": "/account/logout",
+            "controller": "AuthController",
+            "action": "logout",
+            "method": "GET"
         }
     ]
 }
