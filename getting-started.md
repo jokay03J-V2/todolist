@@ -1,9 +1,5 @@
 # Getting Started
 
-## Install dependencies
-You must have mysql PDO extension.\
-N.B: If you want change to PDO extension(postgreSQL, ect..) you must change connection url on `Database` core class.
-
 ## Run migrations
 By default, `todolist` is the database name used during migrations.\
 In `conception` folder, there is a `migrations.sql` file contain all tables structures used by this project.

@@ -3,8 +3,8 @@
 
 ## Requirements
 - php 8.x
-- Mysql(recommended, used by default) 8.x
-- PDO driver depend of your database type
+- Mysql 8.x
+- Mysql PDO driver activated on your `php.ini`
 - Apache server
 
 ## Getting started
@@ -14,6 +14,7 @@ You can found a [getting started here](./getting-started.md)
 Please refer to [getting started](./getting-started.md#run)
 
 ## References
+> References of base core class
 
 ### Config
 You can view an config example [here](./config.exemple.json)
