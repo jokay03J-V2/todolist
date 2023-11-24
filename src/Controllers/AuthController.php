@@ -26,9 +26,10 @@ class AuthController extends BaseController
                 // Hash password
                 $hashedPassword = password_hash($request->body["password"], PASSWORD_DEFAULT);
                 $userModel = new UserModel();
-                // Create user and inform user
+                // Create user
                 $userModel->create($username, $hashedPassword);
-                $this->view->render("auth/register", ["notifications" => [["type" => "success", "message" => "Votre compte viens d'être crée veuillez vous connectez."]]]);
+                // Redirect user to login page
+                $this->view->render("auth/login", ["notifications" => [["type" => "success", "message" => "Votre compte viens d'être crée veuillez vous connectez."]]]);
                 return;
             } catch (Exception $e) {
                 // Handle errors
@@ -68,8 +69,8 @@ class AuthController extends BaseController
     function indexLogin(Request $request, Response $response)
     {
         $notifications = [];
-        // Check if request body include username and password
-        if (!empty($request->body["username"]) && !empty($request->body["password"])) {
+        // Check if request body include username and password and they equal or lower than 255 caracters
+        if (!empty($request->body["username"]) && strlen($request->body["username"]) <= 255 && !empty($request->body["password"]) && strlen($request->body["password"]) <= 255) {
             try {
                 // Avoid xss attack
                 $username = htmlspecialchars($request->body["username"]);
@@ -95,6 +96,20 @@ class AuthController extends BaseController
         }
         // Render view login with notifications
         $this->view->render("auth/login", ["notifications" => $notifications]);
+    }
+
+    /**
+     * Logout user and redirect to login page.
+     */
+    function logout(Request $request, Response $response)
+    {
+        // Remove user from session if exist
+        if (isset($_SESSION["user"]))
+            unset($_SESSION["user"]);
+
+        // Redirect to login page
+        $response->locateTo("/login");
+        return $response;
     }
 }
 ?>
