@@ -20,7 +20,8 @@ class Router
     }
 
     /**
-     * 
+     * Return `true` if route has been finded.
+     * Otherwise `return` false.
      */
     public function findRoute(): bool
     {
