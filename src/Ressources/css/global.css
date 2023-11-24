@@ -3,3 +3,16 @@
     margin: 0px;
     box-sizing: border-box;
 }
+
+.todo {
+    width: 75vw;
+}
+
+.todo-controls {
+    display: flex;
+    width: 10vw;
+}
+
+.hidden {
+    display: none;
+}
