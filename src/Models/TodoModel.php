@@ -25,12 +25,12 @@ class TodoModel extends BaseModel
     /**
      * Create a todo.
      */
-    function create(int $authorId, string $todoContent)
+    function create(int $authorId, string $todoContent, string $createdAt)
     {
         // Prepare query
         $sql = "INSERT INTO " . $this->table . "(USER_ID, TODO_CONTENT, TODO_CREATED_AT) VALUES (:authorId, :todoContent, :createdAt)";
         $preparedQuery = $this->db->prepare($sql);
-        $validSql = $preparedQuery->execute(["authorId" => $authorId, "todoContent" => $todoContent, "createdAt" => date("Y-m-d H:i:s")]);
+        $validSql = $preparedQuery->execute(["authorId" => $authorId, "todoContent" => $todoContent, "createdAt" => $createdAt]);
         // Check if query has been correctly executed
         if ($validSql) {
             // Return created todo id 
