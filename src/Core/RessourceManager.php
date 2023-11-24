@@ -2,9 +2,13 @@
 class RessourceManager
 {
     /**
-     * css files should be used on the header
+     * Css files should be used on the header
      */
     private array $cssFiles = [];
+    /**
+     * Js files should be used at end of the body
+     */
+    private array $jsFiles = [];
     /**
      * Base path ressource
      */
@@ -18,11 +22,19 @@ class RessourceManager
     }
 
     /**
-     * Add css file
+     * Add css file to be served on the head
      */
     function css(string $fileName)
     {
         array_push($this->cssFiles, $fileName);
+    }
+
+    /**
+     * Add js file to be served on body end
+     */
+    function js(string $fileName)
+    {
+        array_push($this->jsFiles, $fileName);
     }
 
     /**
@@ -31,6 +43,13 @@ class RessourceManager
     function getCSS()
     {
         return $this->cssFiles;
+    }
+    /**
+     * Get all js files
+     */
+    function getJS()
+    {
+        return $this->jsFiles;
     }
 }
 ?>
