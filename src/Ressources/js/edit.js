@@ -1,5 +1,6 @@
 const todosContainer = document.querySelectorAll(".todocontainer");
 const editBtns = document.querySelectorAll(".todocontainer .editBtn");
+const todoControls = document.querySelectorAll(".todocontainer > .todo-controls");
 
 for (let index = 0; index < editBtns.length; index++) {
     const editBtn = editBtns[index];
@@ -17,6 +18,8 @@ for (let index = 0; index < editBtns.length; index++) {
             todosContainer[index].children[0].children[0].textContent.trim();
         input.classList.add("form-control")
         input.name = "content";
+        input.maxLength = "255";
+        input.required = true;
 
         // Create submit button
         const buttonSubmit = document.createElement("button")
@@ -26,9 +29,10 @@ for (let index = 0; index < editBtns.length; index++) {
         // Append input and submit button in the form
         form.appendChild(input);
         form.appendChild(buttonSubmit);
+        // Get only valid element(don't blank html node)
+        const children = [...todosContainer[index].childNodes].filter((el) => el.nodeName !== "#text");
         // Hide all children
-        const children = [...todosContainer[index].children]
-        children.forEach((el) => el.style.display = "none")
+        children.forEach((el) => el.classList.add("hidden"))
 
         // Append form to container
         todosContainer[index].appendChild(form);
@@ -51,8 +55,22 @@ for (let index = 0; index < editBtns.length; index++) {
                 // Check if request is done
                 if (request.readyState === XMLHttpRequest.DONE) {
                     // Check if response has been correctly updated todo
-                    if (request.status === 204) {
-                        document.location.href = "/";
+                    if (request.status === 200) {
+                        const response = JSON.parse(request.response);
+                        // Update text content
+                        todosContainer[index].children[0].children[0].textContent = response["content"];
+                        // Update date
+                        todosContainer[index].children[0].children[1].textContent = response["updatedAt"];
+                        // Set element at first
+                        const firstTodo = document.querySelector(".list-group-item:first-of-type");
+                        // Get current li
+                        const elementToByPlaced = document.querySelector(`li[data-id="${todosContainer[index].dataset["id"]}"]`)
+                        // Insert current li before first li
+                        firstTodo.insertAdjacentElement("beforebegin", elementToByPlaced);
+                        // Display todo
+                        children.forEach((el) => el.classList.remove("hidden"));
+                        // Remove update form
+                        form.remove();
                     } else {
                         alert("Une erreur est survenue veuillez réessayer plus tard.")
                     }
