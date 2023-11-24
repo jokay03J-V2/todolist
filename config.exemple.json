@@ -9,9 +9,6 @@
     "ressources": {
         "hostname": "http://localhost:3000"
     },
-    "views": {
-        "notfound": "notfound"
-    },
     "autoload": [
         "src/Controllers",
         "src/Core",
