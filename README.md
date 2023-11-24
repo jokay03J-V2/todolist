@@ -31,9 +31,6 @@ You can view an config example [here](./config.exemple.json)
     "ressources": {
         "hostname": "http://localhost:3000" // url for serve local file using RessourceManager
     },
-    "views": {
-        "notfound": "notfound" // (optional) view loaded when route is not found
-    },
     // directory will be scanned when you use class using spl_autoload
     "autoload": [
         "src/Controllers",
@@ -42,6 +39,12 @@ You can view an config example [here](./config.exemple.json)
     ]
 }
 ```
+
+### Add Not Found Page
+For configure `Not Found` page.
+On `Config/routes.json` you can add `notfound` field.
+You must provide a valid path to your notfound without .php extension.
+_Path start at View_.
 
 ### Serve a local file
 For serve a local file into your view.
