@@ -1,4 +1,5 @@
 {
+    "notfound": "notfound",
     "routes": [
         {
             "path": "/",
