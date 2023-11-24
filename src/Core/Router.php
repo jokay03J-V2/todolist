@@ -5,6 +5,10 @@ class Router
      * All routes
      */
     public $routes = array();
+    /**
+     * View charged when page is not found
+     */
+    public $notFoundView;
     function __construct()
     {
         // Check if routes file exist
@@ -13,6 +17,9 @@ class Router
             $routes = json_decode(file_get_contents(ROOT . "/src/Config/routes.json"), true);
             foreach ($routes["routes"] as $key => $value) {
                 array_push($this->routes, $routes["routes"][$key]);
+            }
+            if (isset($routes["notfound"])) {
+                $this->notFoundView = $routes["notfound"];
             }
         } else {
             throw new Exception("You must have a routes file !");
@@ -44,11 +51,11 @@ class Router
         }
 
         // If config had notfound view and view is not found
-        if (isset(CONFIG["views"]["notfound"]) && !$hasFind) {
+        if (isset($this->notFoundView) && !$hasFind) {
             // Start new ViewManager
             $viewManager = new ViewManager();
             // Render notfound view
-            $viewManager->render(CONFIG["views"]["notfound"]);
+            $viewManager->render($this->notFoundView);
         }
 
         return $hasFind;
