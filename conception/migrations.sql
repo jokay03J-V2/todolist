@@ -36,9 +36,7 @@ create table
         TODO_CONTENT char(255) not null,
         TODO_CREATED_AT datetime not null,
         primary key (TODO_ID)
-    );
-
-alter table TODO engine = InnoDB;
+    ) engine = InnoDB;
 
 /*==============================================================*/
 
@@ -51,10 +49,9 @@ create table
         USER_ID int not null auto_increment,
         USER_NAME char(255) not null,
         USER_PASSWORD char(255) not null,
-        primary key (USER_ID)
-    );
-
-alter table USER engine = InnoDB;
+        primary key (USER_ID),
+        unique(USER_NAME)
+    ) engine = InnoDB;
 
 alter table TODO
 add
