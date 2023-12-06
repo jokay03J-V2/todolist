@@ -1,0 +1,22 @@
+{
+    "name": "joan/todolist",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^10"
+    },
+    "autoload": {
+        "psr-4": {
+            "TodoList\\Project\\": "src/"
+        },
+        "classmap": [
+            "src/*"
+        ]
+    },
+    "authors": [
+        {
+            "name": "jokay03J-V2",
+            "email": "jmagro@edenschool.fr"
+        }
+    ],
+    "require": {}
+}

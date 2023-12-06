@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+require "vendor/autoload.php";
 // Set server default time zone
 date_default_timezone_set("Europe/Paris");
 // Start session
@@ -17,15 +19,15 @@ if (file_exists("./config.json")) {
     throw new Exception("You must have a config");
 }
 
-// Autoload
-spl_autoload_register(function ($class) {
-    foreach (CONFIG["autoload"] as $key => $value) {
-        if (file_exists(ROOT . "/" . $value . "/" . $class . ".php")) {
-            include_once ROOT . "/" . $value . "/" . $class . ".php";
-            break;
-        }
-    }
-});
+// // Autoload
+// spl_autoload_register(function ($class) {
+//     foreach (CONFIG["autoload"] as $key => $value) {
+//         if (file_exists(ROOT . "/" . $value . "/" . $class . ".php")) {
+//             include_once ROOT . "/" . $value . "/" . $class . ".php";
+//             break;
+//         }
+//     }
+// });
 
 // Load router
 include("./router.php");

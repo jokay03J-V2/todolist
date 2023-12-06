@@ -1,4 +1,8 @@
 <?php
+namespace TodoList\Project\Core;
+
+use Exception;
+
 class ViewManager
 {
     /**

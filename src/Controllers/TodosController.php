@@ -1,9 +1,18 @@
 <?php
+namespace TodoList\Project\Controllers;
+
+use Attribute;
+use TodoList\Project\Core\Request;
+use TodoList\Project\Core\Response;
+use TodoList\Project\Core\Route;
+use TodoList\Project\Models\TodoModel;
+
 class TodosController extends BaseController
 {
     /**
      * Show todos
      */
+    #[Route("/", "GET")]
     function index(Request $request, Response $response)
     {
         $userConnected = isset($_SESSION["user"]);
@@ -24,6 +33,7 @@ class TodosController extends BaseController
      * Update todo logic
      * Note: This route is only used for AJAX request
      */
+    #[Route("/todo/update", "POST")]
     function update(Request $request, Response $response)
     {
         // Check if user is connected, otherwise send 401 code
@@ -61,6 +71,7 @@ class TodosController extends BaseController
     /**
      * Create todo logic
      */
+    #[Route("/", "POST")]
     function create(Request $request, Response $response)
     {
         $isConnected = isset($_SESSION["user"]);
@@ -85,6 +96,7 @@ class TodosController extends BaseController
     /**
      * Delete todo logic
      */
+    #[Route("/todo/delete", "GET")]
     function delete(Request $request, Response $response)
     {
         // Check if user is connected, otherwise redirect to login page

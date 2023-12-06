@@ -1,4 +1,10 @@
 <?php
+namespace TodoList\Project\Controllers;
+
+use Attribute;
+use TodoList\Project\Core\ViewManager;
+
+#[Attribute]
 class BaseController
 {
     /**

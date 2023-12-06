@@ -1,4 +1,6 @@
 <?php
+namespace TodoList\Project\Core;
+
 class Response
 {
     /**

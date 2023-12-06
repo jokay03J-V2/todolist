@@ -1,10 +1,19 @@
 <?php
+namespace TodoList\Project\Controllers;
+
+use Exception;
+use TodoList\Project\Core\Request;
+use TodoList\Project\Core\Response;
+use TodoList\Project\Core\Route;
+use TodoList\Project\Models\UserModel;
+
 class AuthController extends BaseController
 {
 
     /**
      * Show register form
      */
+    #[Route("/register", "GET")]
     function showRegister()
     {
         // Render register page
@@ -14,6 +23,7 @@ class AuthController extends BaseController
     /**
      * Handle register logic
      */
+    #[Route("/register", "POST")]
     function indexRegister(Request $request, Response $response)
     {
         // Store notifications
@@ -57,6 +67,7 @@ class AuthController extends BaseController
     /**
      * Show Login form
      */
+    #[Route("/login", "GET")]
     function showLogin()
     {
         // render login page
@@ -66,6 +77,7 @@ class AuthController extends BaseController
     /**
      * Handle login logic
      */
+    #[Route("/login", "POST")]
     function indexLogin(Request $request, Response $response)
     {
         $notifications = [];
@@ -101,6 +113,7 @@ class AuthController extends BaseController
     /**
      * Logout user and redirect to login page.
      */
+    #[Route("/account/logout", "GET")]
     function logout(Request $request, Response $response)
     {
         // Remove user from session if exist

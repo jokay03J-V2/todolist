@@ -1,4 +1,9 @@
 <?php
+namespace TodoList\Project\Models;
+
+use Exception;
+use PDO;
+
 class UserModel extends BaseModel
 {
     public $table = "user";

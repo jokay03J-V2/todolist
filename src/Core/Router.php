@@ -1,28 +1,38 @@
 <?php
+namespace TodoList\Project\Core;
+
+use Exception;
+use ReflectionClass;
+use ReflectionMethod;
+use TodoList\Project\Config\ViewConfig;
+
 class Router
 {
     /**
      * All routes
      */
-    public $routes = array();
-    /**
-     * View charged when page is not found
-     */
-    public $notFoundView;
+    public $routes = [];
     function __construct()
     {
-        // Check if routes file exist
-        if (file_exists(ROOT . "/src/Config/routes.json")) {
-            // Transform JSON to an array
-            $routes = json_decode(file_get_contents(ROOT . "/src/Config/routes.json"), true);
-            foreach ($routes["routes"] as $key => $value) {
-                array_push($this->routes, $routes["routes"][$key]);
+        $controllers = glob(ROOT . "/src/Controllers/*.php");
+        foreach ($controllers as $key => $controllerPath) {
+            $controller = str_replace(".php", "", basename($controllerPath));
+            $toBe = "\\TodoList\\Project\\Controllers\\" . $controller;
+            $reflect = new ReflectionClass($toBe);
+            $methods = $reflect->getMethods(ReflectionMethod::IS_PUBLIC);
+            foreach ($methods as $reflectionMethod) {
+                $routeAttributes = $reflectionMethod->getAttributes(Route::class);
+
+                foreach ($routeAttributes as $routeAttribute) {
+                    $route = $routeAttribute->newInstance();
+                    $this->routes[] = [
+                        'controller' => $controller,
+                        'action' => $reflectionMethod->name,
+                        'path' => $route->getPath(),
+                        'method' => $route->getMethod()
+                    ];
+                }
             }
-            if (isset($routes["notfound"])) {
-                $this->notFoundView = $routes["notfound"];
-            }
-        } else {
-            throw new Exception("You must have a routes file !");
         }
     }
 
@@ -30,13 +40,14 @@ class Router
      * Return `true` if route has been finded.
      * Otherwise `return` false.
      */
-    public function findRoute(): bool
+    public function init(): bool
     {
         $hasFind = false;
         foreach ($this->routes as $key => $route) {
             // Check if path and method match with a route
             if ($route["path"] === $this->getRequestUri() && $route["method"] === $_SERVER["REQUEST_METHOD"]) {
-                $controller = new $route["controller"];
+                $controllerPath = '\\TodoList\\Project\\Controllers\\' . $route["controller"];
+                $controller = new $controllerPath;
                 $action = $route["action"];
                 // Check if controller has method
                 if (method_exists($controller, $action)) {
@@ -49,13 +60,13 @@ class Router
                 }
             }
         }
-
+        $notFoundView = ViewConfig::getNotFoundView();
         // If config had notfound view and view is not found
-        if (isset($this->notFoundView) && !$hasFind) {
+        if (isset($notFoundView) && !$hasFind) {
             // Start new ViewManager
             $viewManager = new ViewManager();
             // Render notfound view
-            $viewManager->render($this->notFoundView);
+            $viewManager->render($notFoundView);
         }
 
         return $hasFind;
@@ -64,7 +75,7 @@ class Router
     /**
      * Get request uri without query string
      */
-    public function getRequestUri()
+    private function getRequestUri()
     {
         $uri = $_SERVER["REQUEST_URI"];
         // Get latest ? position
@@ -85,7 +96,7 @@ class Router
     /**
      * Run controller method and display response
      */
-    public function runController(mixed $controller, string $action)
+    private function runController(mixed $controller, string $action)
     {
         // Create base response and request
         $baseResponse = new Response();

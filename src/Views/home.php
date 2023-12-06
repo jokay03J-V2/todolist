@@ -23,7 +23,7 @@ $ressources->css("css/todo.css");
                             data-id="<?= htmlspecialchars($todo["TODO_ID"]) ?>">
                             <div class="h-100 max-vw-100 todo">
                                 <div class="w-100 text-wrap text-break">
-                                    <?= trim(htmlspecialchars($todo["TODO_CONTENT"])) ?>
+                                    <?= trim(stripslashes(htmlentities($todo["TODO_CONTENT"], ENT_HTML5))) ?>
                                 </div>
                                 <div>
                                     <?= date("d-m-Y H:i:s", strtotime($todo["TODO_CREATED_AT"])) ?>

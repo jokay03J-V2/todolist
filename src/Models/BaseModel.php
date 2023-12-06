@@ -1,4 +1,9 @@
 <?php
+namespace TodoList\Project\Models;
+
+use PDO;
+use TodoList\Project\Core\Database;
+
 class BaseModel
 {
     /**

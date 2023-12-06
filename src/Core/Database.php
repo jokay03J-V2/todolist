@@ -1,4 +1,8 @@
 <?php
+namespace TodoList\Project\Core;
+
+use PDO;
+
 class Database
 {
     /**
